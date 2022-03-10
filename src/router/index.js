@@ -1,6 +1,6 @@
 
 import { createRouter, createWebHistory } from "vue-router"
-import Login from "../views/login.vue"
+import Login from "../views/Login.vue"
 
 const routes = [
   {
@@ -8,7 +8,7 @@ const routes = [
     name: 'Login',
     component: Login,
     meta: {
-      title: "Login"
+      title: "Login Home"
     }
   }
 ]
