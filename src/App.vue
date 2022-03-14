@@ -1,27 +1,17 @@
 <template>
-  <main id="app" class="w-screen h-screen" :style="{backgroundImage: 'url(' + bgImage + ')'}" >
-    <router-view></router-view>
+  <main id="app" class="w-screen h-screen">
+    <app-layout>
+      <router-view />
+    </app-layout>
   </main>
 </template>
 
 <script>
+import AppLayout from "./layouts/AppLayout.vue"
 export default {
-  name: 'App',
-  setup() {
-    const bgImage = require("./assets/images/svg/blob-scene-haikei.svg")
-
-
-    return {
-      bgImage
-    }
-  }
-}
+  name: "App",
+  components: {
+    AppLayout
+  },
+};
 </script>
-
-<style scoped>
-#app {
-  background-size: cover;
-  background-origin: center;
-  background-repeat: no-repeat;
-}
-</style>
