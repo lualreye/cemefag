@@ -1,7 +1,9 @@
 <template>
-  <div class="w-screen h-screen flex justify-center items-center">
+  <div class="w-screen h-screen flex justify-center items-center flex-col">
+    <h1 class="w-full text-center text-3xl text-textColor mb-24">
+      Identificar al paciente
+    </h1>
     <div class="w-56">
-      <h1 class="w-full text-center text-3xl text-textColor mb-24">Registro</h1>
       <form class="w-full flex flex-col justify-center items-center">
         <div class="w-full flex flex-col justify-center items-center mb-4">
           <!-- PASSWORD INPUT -->
@@ -15,23 +17,21 @@
               <icon name="password" class="text-grayColor" />
             </div>
             <input
-              type="Number"
+              type="text"
               v-model="id"
               placeholder="Escriba su contraseña"
               class="placeholder-grayColor bg-backgroundWhite border-none focus:border-none outline-none text-primary w-full text-xs"
             />
           </div>
-          <span
-            v-if="idValidation"
-            class="text-xs font-light text-pink-600"
-            ></span
+          <span v-if="!idValidation" class="text-xs font-light text-pink-600"
+            >Solo se aceptan numeros</span
           >
         </div>
       </form>
       <div class="w-full flex justify-center items-center">
         <c-button
           name="Identificar"
-          :disabled="idValidation"
+          :disableButton="!idValidation"
           @click="reqUser"
         />
       </div>
@@ -54,22 +54,22 @@ export default {
     });
 
     const idValidation = computed(() => {
-      return idIsValid(user.id) ? true : false;
+      return idIsValid(user.id) && user.id !== null && user.id !== "";
     });
 
     function idIsValid(id) {
-      const idRgx = /^[0-9]{0,}$/
-      return idRgx.test(id)
+      const idRgx = /^[0-9]{0,}$/;
+      return idRgx.test(id);
     }
 
     function reqUser() {
-      console.log('Estamos identificando usuario');
+      console.log("Estamos identificando usuario");
     }
 
     return {
       ...toRefs(user),
       idValidation,
-      reqUser
+      reqUser,
     };
   },
 };

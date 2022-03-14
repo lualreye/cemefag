@@ -18,7 +18,7 @@ export default {
     },
     disableButton: {
       type: Boolean,
-      required: true,
+      required: null,
     },
   },
   setup(props) {
