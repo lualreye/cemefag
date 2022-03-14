@@ -1,6 +1,13 @@
-import { mdiAccountOutline, mdiLockOutline } from "@mdi/js"
+import {
+  mdiAccountOutline,
+  mdiChevronDown,
+  mdiChevronUp,
+  mdiLockOutline,
+} from "@mdi/js";
 
 export default {
   account: mdiAccountOutline,
-  password: mdiLockOutline
-}
+  password: mdiLockOutline,
+  arrowUp: mdiChevronUp,
+  arrowDown: mdiChevronDown,
+};
