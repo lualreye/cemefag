@@ -42,14 +42,18 @@
             />
           </div>
           <span
-            v-if="passwordValidation"
+            v-if="!passwordValidation"
             class="text-xs font-light text-pink-600"
             >No haz introducido password</span
           >
         </div>
       </form>
       <div class="w-full flex justify-center items-center">
-        <c-button name="Ingresar" :disabled="credentialsAreValid" @click="sendCredentials" />
+        <c-button
+          name="Ingresar"
+          :disableButton="!credentialsAreValid"
+          @click="sendCredentials"
+        />
       </div>
     </div>
   </div>
@@ -71,7 +75,9 @@ export default {
     });
 
     const emailValidation = computed(() => {
-      return emailisValid(credentials.user) || credentials.user === null ? false : true;
+      return emailisValid(credentials.user) || credentials.user === null
+        ? false
+        : true;
     });
 
     function emailisValid(email) {
@@ -80,16 +86,18 @@ export default {
     }
 
     const passwordValidation = computed(() => {
-      return credentials.password === "" ? true : false;
+      return credentials.password === "" || credentials.password === null
+        ? false
+        : true;
     });
 
     const credentialsAreValid = computed(() => {
-      return emailValidation.value && passwordValidation.value;
+      console.log(emailValidation.value && passwordValidation.value);
+      return !emailValidation.value && passwordValidation.value;
     });
 
-
     function sendCredentials() {
-      console.log(credentials.user, credentials.password)
+      console.log(credentials.user, credentials.password);
     }
 
     return {
@@ -97,7 +105,7 @@ export default {
       emailValidation,
       passwordValidation,
       credentialsAreValid,
-      sendCredentials
+      sendCredentials,
     };
   },
 };
