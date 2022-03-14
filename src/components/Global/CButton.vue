@@ -2,7 +2,7 @@
   <button
     class="w-56 py-3 text-xs flex justify-center items-center bg-blue text-backgroundWhite rounded-lg"
     :class="buttonDisabled"
-    :disabled="disabled"
+    :disabled="disableButton"
   >
     {{ name }}
   </button>
@@ -16,14 +16,14 @@ export default {
       type: String,
       required: true,
     },
-    disabled: {
+    disableButton: {
       type: Boolean,
       required: true,
     },
   },
   setup(props) {
     const buttonDisabled = computed(() => {
-      if (props.disabled) {
+      if (props.disableButton) {
         return "bg-blue-300";
       } else {
         return "bg-primary";
