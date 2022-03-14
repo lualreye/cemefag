@@ -92,7 +92,6 @@ export default {
     });
 
     const credentialsAreValid = computed(() => {
-      console.log(emailValidation.value && passwordValidation.value);
       return !emailValidation.value && passwordValidation.value;
     });
 
