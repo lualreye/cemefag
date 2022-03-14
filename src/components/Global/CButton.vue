@@ -3,7 +3,6 @@
     class="w-56 py-3 text-xs flex justify-center items-center bg-blue text-backgroundWhite rounded-lg"
     :class="buttonDisabled"
     :disabled="disabled"
-    @click="$emit('click')"
   >
     {{ name }}
   </button>
