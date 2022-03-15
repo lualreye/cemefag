@@ -1,8 +1,8 @@
 <template>
   <div class="w-full">
-    <div class="w-full">
+    <div class="w-full px-4">
       <!-- PATIENT DATA -->
-      <div class="w-full max-w-2xl mb-14 px-8 py-4 mx-auto mt-16 shadow-md">
+      <div class="w-full max-w-2xl mb-14 px-10 py-6 mx-auto mt-16 shadow-md">
         <div
           class="w-full flex border-b border-primary justify-between items-center px-1"
         >
@@ -35,24 +35,59 @@
           <div class="w-full flex justify-start items-center mt-4">
             <p class="text-textColor text-sm font-medium mr-2">Email:</p>
             <p class="text-textColor text-sm font-normal mr-1">
-              {{ patient.email.toUpperCase() }}
+              {{ patient.email }}
+            </p>
+          </div>
+          <!-- PATIENT PHONE -->
+          <div class="w-full flex justify-start items-center mt-4">
+            <p class="text-textColor text-sm font-medium mr-2">Teléfono:</p>
+            <p class="text-textColor text-sm font-normal mr-1">
+              {{ patient.phone }}
+            </p>
+          </div>
+          <!-- PATIENT PHONE -->
+          <div class="w-full flex justify-start items-center mt-4">
+            <p class="text-textColor text-sm font-medium mr-2">
+              Fecha de nacimiento:
+            </p>
+            <p class="text-textColor text-sm font-normal mr-1">
+              {{ patient.birthday }}
             </p>
           </div>
         </div>
       </div>
       <!-- CONSULT DATA -->
-      <div class="w-full mt-6"></div>
+      <div class="w-full max-w-2xl mb-14 px-10 py-6 mx-auto mt-16 shadow-md">
+        <div v-if="isEditing" class="w-full">
+          <consultation v-if="isEditing" />
+          <div class="w-56 mx-auto">
+            <c-button name="Agendar cita" @click="editConsultation" />
+          </div>
+        </div>
+        <div v-else class="w-full">
+          <new-consultation />
+          <div class="w-56 mx-auto">
+            <c-button name="Cancelar" @click="editConsultation" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Icon from "@/components/Global/Icon.vue";
-import { computed } from "vue";
+import CButton from "@/components/Global/CButton.vue"
+import Consultation from "@/components/CreateConsultation/Consultation.vue"
+import NewConsultation from "@/components/CreateConsultation/NewConsultation.vue"
+import { computed, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 export default {
   components: {
     Icon,
+    CButton,
+    Consultation,
+    NewConsultation
   },
   setup() {
     const store = useStore();
@@ -60,8 +95,13 @@ export default {
       return store.getters["userAuthentication/getPatient"];
     });
 
+    const editingState = reactive({
+      isEditing: false,
+    });
+
     return {
       patient,
+      ...toRefs(editingState),
     };
   },
 };
