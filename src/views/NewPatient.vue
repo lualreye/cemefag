@@ -121,6 +121,7 @@
 import CButton from "@/components/Global/CButton.vue";
 import { computed, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from 'vuex'
 export default {
   components: {
     CButton,
@@ -192,11 +193,14 @@ export default {
       );
     });
 
+    const store = useStore()
+
     function createPatient() {
       const user = {
         ...userState
       }
-      console.log(user)
+      store.dispatch("userAuthentication/createPatientUp", user)
+      router.push('/create-consultation')
     }
 
     return {
