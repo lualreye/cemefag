@@ -3,6 +3,7 @@ import {
   mdiChevronDown,
   mdiChevronUp,
   mdiLockOutline,
+  mdiPencilOutline,
 } from "@mdi/js";
 
 export default {
@@ -10,4 +11,5 @@ export default {
   password: mdiLockOutline,
   arrowUp: mdiChevronUp,
   arrowDown: mdiChevronDown,
+  edit: mdiPencilOutline
 };
