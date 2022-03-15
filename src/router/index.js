@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/Login.vue";
 import User from "../views/User.vue";
+import NewPatient from "@/views/NewPatient"
 
 
 const routes = [
@@ -19,6 +20,15 @@ const routes = [
     component: User,
     meta: {
       title: "User",
+      layout: "AuthLayout",
+    },
+  },
+  {
+    path: "/new-patient",
+    name: "newPatient",
+    component: NewPatient,
+    meta: {
+      title: "Nuevo paciente",
       layout: "AuthLayout",
     },
   },
