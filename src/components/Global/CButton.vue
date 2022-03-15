@@ -20,6 +20,11 @@ export default {
       type: Boolean,
       required: null,
     },
+    buttonColor: {
+      type: String,
+      required: null,
+      default: "bg-primary",
+    },
   },
   setup(props) {
     const buttonDisabled = computed(() => {
