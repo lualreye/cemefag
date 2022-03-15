@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-screen flex justify-center items-center">
+  <div class="w-full h-full flex justify-center items-center">
     <div class="w-56">
       <h1 class="w-full text-center text-3xl text-textColor mb-20">Registro</h1>
       <form class="w-full flex flex-col justify-center items-center">
