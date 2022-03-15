@@ -5,30 +5,25 @@
 </template>
 
 <script>
-import DefaultLayout from "./DefaultLayout"
-import { markRaw, watchEffect } from "vue"
-import { useRoute } from 'vue-router'
+import DefaultLayout from "./DefaultLayout";
+import AuthLayout from "./AuthLayout.vue"
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 export default {
   setup() {
-    const layout = markRaw(DefaultLayout)
-    const route = useRoute()
+    const route = useRoute();
 
-    watchEffect(
-      () => route.meta,
-      async meta => {
-        try {
-          const component = await import(`@/layouts/${meta.layout}.vue`)
-          layout.value = component?.default || DefaultLayout
-        } catch (error) {
-          layout.value = DefaultLayout
-        }
-      },
-      { immediate: true }
-    )
+    const layout = computed(() => {
+      if(route.meta !== undefined) {
+        return AuthLayout
+      } else {
+        return DefaultLayout
+      }
+    })
 
     return {
-      layout
-    }
+      layout,
+    };
   },
 };
 </script>

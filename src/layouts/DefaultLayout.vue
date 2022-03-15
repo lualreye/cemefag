@@ -7,6 +7,7 @@
 <script>
 
 export default {
+  name: "DefaultLayout",
   setup() {
     const bgImage = require("../assets/images/svg/blob-scene-haikei.svg");
 
