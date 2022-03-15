@@ -16,9 +16,14 @@
 
 
 <script>
+import Icon from "@/components/Global/Icon.vue"
 import { useStore } from "vuex"
 import { computed, reactive, toRefs } from "vue"
 export default {
+  components: {
+    Icon
+  },
+
   setup() {
 
     const modalState = reactive({
