@@ -13,7 +13,7 @@
         </p>
       </div>
       <!-- USER NAME AND LASTNAME -->
-      <div class="w-full flex flex-wrap justify-between items-center mb-4">
+      <div class="w-full flex flex-wrap justify-between items-center">
         <!-- USER NAME -->
         <div class="w-full md:w-1/2">
           <label class="w-full text-xs font-medium text-textColor">
@@ -40,7 +40,7 @@
         </div>
       </div>
       <!-- CI AND USER BIRTHDAY -->
-      <div class="w-full flex flex-wrap justify-between items-center mb-4">
+      <div class="w-full flex flex-wrap justify-between items-center">
         <!-- USER CI -->
         <div class="w-full md:w-1/2">
           <label class="w-full text-xs font-medium text-textColor">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <!-- User email and phone -->
-      <div class="w-full flex flex-wrap justify-between items-center mb-4">
+      <div class="w-full flex flex-wrap justify-between items-center">
         <!-- USER EMAIL -->
         <div class="w-full md:w-1/2">
           <label class="w-full text-xs font-medium text-textColor">
@@ -94,7 +94,7 @@
         </div>
       </div>
       <!-- BUTTONS SECTION -->
-      <div class="w-full flex flex-wrap justify-between items-center">
+      <div class="w-full flex flex-wrap justify-between items-center mt-8">
         <div class="w-full md:w-1/2 flex justify-start items-center">
           <button
             name="Cancelar"
@@ -109,6 +109,7 @@
             name="Guardar"
             :disableButton="!userValidation"
             class="md:w-11/12"
+            @click="createPatient"
           />
         </div>
       </div>
@@ -191,16 +192,18 @@ export default {
       );
     });
 
+    function createPatient() {
+      const user = {
+        ...userState
+      }
+      console.log(user)
+    }
+
     return {
       ...toRefs(userState),
       userValidation,
       redirectionToUser,
-      userName,
-      userLastname,
-      userCi,
-      userBirthday,
-      userEmail,
-      userPhone,
+      createPatient
     };
   },
 };
