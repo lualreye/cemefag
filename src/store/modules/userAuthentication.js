@@ -10,6 +10,12 @@ const state = () => ({
     email: "lualreye@gmail.com",
     phone: "0960952970",
   },
+  consultation: {
+    specialty: "traumatologia",
+    date: "27/01/1995",
+    time: "13:00",
+    doctor: "Luis Reyes"
+  },
 });
 
 const getters = {
