@@ -1,59 +1,66 @@
 <template>
   <header class="w-full flex justify-center items-center">
-    <div class="max-w-screen-2xl border border-b-primary flex items-center justify-end">
-      <div class="w-5 h-5 flex justify-center items-center">
-        <icon name="user" class="text-textColor" />
+    <div
+      class="max-w-screen-2xl w-full border-b border-primary flex items-center justify-between py-3 px-3"
+    >
+      <figure class="w-36 justify-center">
+        <img :src="logo" alt="" />
+      </figure>
+      <div class="flex justify-center items-center">
+        <div class="w-5 h-5 flex justify-center items-center mr-2">
+          <icon name="account" class="text-textColor" />
+        </div>
+        <p class="text-base text-textColor">Usuario id</p>
+        <button
+          class="flex w-5 h-5 justify-center items-center"
+          @click="activeModal"
+        >
+          <icon :name="arrowDirection" class="text-textColor" />
+        </button>
       </div>
-      <p class="text-base text-textColor">
-        {{ user }}
-      </p>
-      <button class="flex w-5 h-5 justify-center items-center" @click="activeModal">
-        <icons name="" class="text-textColor" />
-      </button>
     </div>
   </header>
 </template>
 
-
 <script>
-import Icon from "@/components/Global/Icon.vue"
-import { useStore } from "vuex"
-import { computed, reactive, toRefs } from "vue"
+import Icon from "@/components/Global/Icon.vue";
+import { useStore } from "vuex";
+import { computed, reactive, toRefs } from "vue";
 export default {
   components: {
-    Icon
+    Icon,
   },
 
   setup() {
-
+    const logo = require("@/assets/images/company/logo.png");
     const modalState = reactive({
-      isModalOpen: false
-    })
+      isModalOpen: false,
+    });
 
-    const store = useStore()
+    const store = useStore();
     const user = computed(() => {
-      return store.getters['userAuthenticatin/getUser']
-    })
+      return store.getters["userAuthenticatin/getUser"];
+    });
 
     const arrowDirection = computed(() => {
-      return modalState.isModalOpen === true ? 'arrowUp' : 'arrowDown'
-    })
+      return modalState.isModalOpen === true ? "arrowUp" : "arrowDown";
+    });
 
     function activeModal() {
       if (modalState.isModalOpen) {
-        modalState.isModalOpen = false
+        modalState.isModalOpen = false;
       } else {
-        modalState.isModalOpen = true
+        modalState.isModalOpen = true;
       }
     }
-
 
     return {
       user,
       ...toRefs(modalState),
       activeModal,
-      arrowDirection
-    }
-  }
-}
+      arrowDirection,
+      logo,
+    };
+  },
+};
 </script>
