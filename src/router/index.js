@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/Login.vue";
 import User from "../views/User.vue";
-import NewPatient from "@/views/NewPatient"
-import CreateConsultation from "@/views/CreateConsultation.vue"
-
+import NewPatient from "@/views/NewPatient";
+import CreateConsultation from "@/views/CreateConsultation.vue";
 
 const routes = [
   {
