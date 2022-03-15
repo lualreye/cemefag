@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/Login.vue";
 import User from "../views/User.vue";
 import NewPatient from "@/views/NewPatient"
+import CreateConsultation from "@/views/CreateConsultation.vue"
 
 
 const routes = [
@@ -29,6 +30,15 @@ const routes = [
     component: NewPatient,
     meta: {
       title: "Nuevo paciente",
+      layout: "AuthLayout",
+    },
+  },
+  {
+    path: "/create-consultation",
+    name: "createNewConsultation",
+    component: CreateConsultation,
+    meta: {
+      title: "Nueva consulta",
       layout: "AuthLayout",
     },
   },
