@@ -14,7 +14,7 @@ export default {
     const route = useRoute();
 
     const layout = computed(() => {
-      if(route.meta !== undefined) {
+      if(route.meta.layout === "AuthLayout") {
         return AuthLayout
       } else {
         return DefaultLayout
