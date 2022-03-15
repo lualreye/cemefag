@@ -10,7 +10,7 @@
         <div class="w-5 h-5 flex justify-center items-center mr-2">
           <icon name="account" class="text-textColor" />
         </div>
-        <p class="text-base text-textColor">Usuario id</p>
+        <p class="text-base text-textColor">{{ user }}</p>
         <button
           class="flex w-5 h-5 justify-center items-center"
           @click="activeModal"
@@ -38,9 +38,7 @@ export default {
     });
 
     const store = useStore();
-    const user = computed(() => {
-      return store.getters["userAuthenticatin/getUser"];
-    });
+    const user = computed(() => store.getters["userAuthentication/getUser"]);
 
     const arrowDirection = computed(() => {
       return modalState.isModalOpen === true ? "arrowUp" : "arrowDown";
