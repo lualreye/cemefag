@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-screen flex justify-center items-center flex-col">
+  <div class="w-screen h-screen flex justify-center items-center flex-col bg-backgroundWhite">
     <h1 class="w-full text-center text-3xl text-textColor mb-24">
       Identificar al paciente
     </h1>
