@@ -58,8 +58,8 @@
       </div>
       <!-- CONSULT DATA -->
       <div class="w-full max-w-2xl mb-14 px-10 py-6 mx-auto mt-16 shadow-md">
-        <div v-if="isEditing" class="w-full">
-          <consultation v-if="isEditing" />
+        <div v-if="!isEditing" class="w-full">
+          <consultation v-if="!isEditing" />
           <div class="w-56 mx-auto">
             <c-button name="Agendar cita" @click="editConsultation" />
           </div>
@@ -99,9 +99,18 @@ export default {
       isEditing: false,
     });
 
+    function editConsultation() {
+      if(editingState.isEditing) {
+        editingState.isEditing = false
+      } else {
+        editingState.isEditing = true
+      }
+    }
+
     return {
       patient,
       ...toRefs(editingState),
+      editConsultation
     };
   },
 };
