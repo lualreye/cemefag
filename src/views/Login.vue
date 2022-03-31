@@ -22,7 +22,7 @@
             />
           </div>
           <span v-if="emailValidation" class="text-xs font-light text-pink-600"
-            >Email no valido</span
+            >Usuario no valido</span
           >
           <!-- PASSWORD INPUT -->
           <label class="text-sm text-textColor w-full text-left mb-1 mt-4">
@@ -63,6 +63,7 @@
 import Icon from "../components/Global/Icon.vue";
 import CButton from "../components/Global/CButton.vue";
 import { computed, reactive, toRefs } from "vue";
+import { useStore } from "vuex";
 export default {
   components: {
     Icon,
@@ -74,16 +75,20 @@ export default {
       password: null,
     });
 
+    const store = useStore();
+
     const emailValidation = computed(() => {
-      return emailisValid(credentials.user) || credentials.user === null
+      return  credentials.user !== null
         ? false
         : true;
     });
 
-    function emailisValid(email) {
-      const userRgx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-      return userRgx.test(email);
-    }
+
+    // TODO params (*) email
+    // function emailisValid(email) {
+    //   const userRgx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    //   return userRgx.test(email);
+    // }
 
     const passwordValidation = computed(() => {
       return credentials.password === "" || credentials.password === null
@@ -95,8 +100,15 @@ export default {
       return !emailValidation.value && passwordValidation.value;
     });
 
+    // TODO: params (*) username, password
     function sendCredentials() {
-      console.log(credentials.user, credentials.password);
+      const user = {
+        us_nombre: credentials.user,
+        us_clave: credentials.password,
+      };
+      //   "us_nombre": "userGea",
+      //  "us_clave": "password"
+      store.dispatch("userAuthentication/login", user);
     }
 
     return {
