@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const state = () => ({
   user: "Luis",
   // patient: null,
@@ -14,7 +16,7 @@ const state = () => ({
     specialty: "traumatologia",
     date: "27/01/1995",
     time: "13:00",
-    doctor: "Luis Reyes"
+    doctor: "Luis Reyes",
   },
 });
 
@@ -44,6 +46,22 @@ const actions = {
     commit("SET_LOADING", true);
     commit("SET_PATIENT", payload);
     commit("SET_LOADING", false);
+  },
+  async login({ commit }, payload) {
+    try {
+      commit("SET_LOADING", true);
+      const response = await axios.post(
+        `${process.env.VUE_APP_BASE_URL}/auth/login`,
+        {
+          us_nombre: payload.us_nombre,
+          us_clave: payload.us_clave,
+        }
+      );
+      console.log(response);
+      commit("SET_LOADING", false);
+    } catch (err) {
+      console.error("ERROR_LOGIN_USER", err);
+    }
   },
 };
 
