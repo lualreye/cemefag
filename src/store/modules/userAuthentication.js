@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../../router"
 
 const state = () => ({
   user: null,
@@ -61,6 +62,7 @@ const actions = {
         }
       );
       commit("SET_USER", response.data.data.user)
+      router.push("/user")
       commit("SET_LOADING", false);
     } catch (err) {
       console.error("ERROR_LOGIN_USER", err);
