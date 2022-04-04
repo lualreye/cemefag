@@ -28,7 +28,7 @@
         <div class="w-5 h-5 flex justify-center items-center mr-2">
           <icon name="account" class="text-textColor" />
         </div>
-        <p class="text-base text-textColor">{{ user }}</p>
+        <p class="text-base text-textColor">{{ user.us_nombre }}</p>
         <button
           class="flex w-5 h-5 justify-center items-center"
           @click="activeModal"
