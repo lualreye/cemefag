@@ -18,31 +18,31 @@
           <div class="w-full flex justify-start items-center">
             <p class="text-textColor text-sm font-medium mr-2">Paciente:</p>
             <p class="text-textColor text-sm font-normal mr-1">
-              {{ patient.name.toUpperCase() }}
+              {{ patient.pc_nombres.toUpperCase() }}
             </p>
             <p class="text-textColor text-sm font-normal mr-1">
-              {{ patient.lastname.toUpperCase() }}
+              {{ patient.pc_apellidos.toUpperCase() }}
             </p>
           </div>
           <!-- PATIENT CI -->
           <div class="w-full flex justify-start items-center mt-4">
             <p class="text-textColor text-sm font-medium mr-2">Cédula:</p>
             <p class="text-textColor text-sm font-normal mr-1">
-              {{ patient.ci.toUpperCase() }}
+              {{ patient.pc_cedula.toUpperCase() }}
             </p>
           </div>
           <!-- PATIENT EMAIL -->
           <div class="w-full flex justify-start items-center mt-4">
             <p class="text-textColor text-sm font-medium mr-2">Email:</p>
             <p class="text-textColor text-sm font-normal mr-1">
-              {{ patient.email }}
+              {{ patient.pc_mail }}
             </p>
           </div>
           <!-- PATIENT PHONE -->
           <div class="w-full flex justify-start items-center mt-4">
             <p class="text-textColor text-sm font-medium mr-2">Teléfono:</p>
             <p class="text-textColor text-sm font-normal mr-1">
-              {{ patient.phone }}
+              {{ patient.pc_celular }}
             </p>
           </div>
           <!-- PATIENT PHONE -->
@@ -51,7 +51,7 @@
               Fecha de nacimiento:
             </p>
             <p class="text-textColor text-sm font-normal mr-1">
-              {{ patient.birthday }}
+              {{ patient.pc_fecha_nacim }}
             </p>
           </div>
         </div>
@@ -92,7 +92,7 @@ export default {
   setup() {
     const store = useStore();
     const patient = computed(() => {
-      return store.getters["userAuthentication/getPatient"];
+      return store.getters["patient/getPatient"];
     });
 
     const editingState = reactive({

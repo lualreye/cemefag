@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../../router";
 
 const state = () => ({
   patient: null,
@@ -29,9 +30,9 @@ const actions = {
           headers: { Authorization: `Bearer ${localStorage.getItem("user-token")}`}
         }
       );
-      console.log(patientRes.data.data);
       const patient = patientRes.data.data;
-      commit("SET_PATIENT", { patient });
+      router.push("/create-consultation")
+      commit("SET_PATIENT", patient);
     } catch (e) {
       console.error("CANNOT_GET_PATIENT", e);
     }
