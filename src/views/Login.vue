@@ -78,9 +78,7 @@ export default {
     const store = useStore();
 
     const emailValidation = computed(() => {
-      return  credentials.user !== null
-        ? false
-        : true;
+      return credentials.user !== null ? false : true;
     });
 
 
@@ -95,6 +93,7 @@ export default {
         ? false
         : true;
     });
+
 
     const credentialsAreValid = computed(() => {
       return !emailValidation.value && passwordValidation.value;
