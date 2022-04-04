@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const state = () => ({
-  user: "Luis",
+  user: null,
   // patient: null,
   isLoading: false,
   patient: {
@@ -39,6 +39,9 @@ const mutations = {
   SET_LOADING(state, boolean) {
     state.isLoading = boolean;
   },
+  SET_USER(state, user) {
+    state.user = user
+  }
 };
 
 const actions = {
@@ -57,7 +60,7 @@ const actions = {
           us_clave: payload.us_clave,
         }
       );
-      console.log(response);
+      commit("SET_USER", response.data.data.user)
       commit("SET_LOADING", false);
     } catch (err) {
       console.error("ERROR_LOGIN_USER", err);
