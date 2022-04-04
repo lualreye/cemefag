@@ -43,6 +43,7 @@
 import Icon from "../components/Global/Icon.vue";
 import CButton from "../components/Global/CButton.vue";
 import { computed, reactive, toRefs } from "vue";
+import { useStore } from "vuex";
 export default {
   components: {
     Icon,
@@ -52,6 +53,8 @@ export default {
     const user = reactive({
       id: null,
     });
+
+    const store = useStore()
 
     const idValidation = computed(() => {
       return idIsValid(user.id) && user.id !== null && user.id !== "";
@@ -63,7 +66,8 @@ export default {
     }
 
     function reqUser() {
-      console.log("Estamos identificando usuario");
+      const cedula = user.id;
+      store.dispatch("patient/getPatient", cedula)
     }
 
     return {
