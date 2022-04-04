@@ -3,6 +3,7 @@ import Login from "../views/Login.vue";
 import User from "../views/User.vue";
 import NewPatient from "@/views/NewPatient";
 import CreateConsultation from "@/views/CreateConsultation.vue";
+import store from "../store";
 
 const routes = [
   {
@@ -22,6 +23,14 @@ const routes = [
       title: "User",
       layout: "AuthLayout",
     },
+    beforeEnter: (to, from, next) => {
+      if (!store.getters["userAuthentication/getUser"]) {
+        return next({
+          name: "Login",
+        });
+      }
+      next();
+    },
   },
   {
     path: "/new-patient",
@@ -31,6 +40,14 @@ const routes = [
       title: "Nuevo paciente",
       layout: "AuthLayout",
     },
+    beforeEnter: (to, from, next) => {
+      if (!store.getters["userAuthentication/getUser"]) {
+        return next({
+          name: "Login",
+        });
+      }
+      next();
+    },
   },
   {
     path: "/create-consultation",
@@ -39,6 +56,14 @@ const routes = [
     meta: {
       title: "Nueva consulta",
       layout: "AuthLayout",
+    },
+    beforeEnter: (to, from, next) => {
+      if (!store.getters["userAuthentication/getUser"]) {
+        return next({
+          name: "Login",
+        });
+      }
+      next();
     },
   },
 ];
