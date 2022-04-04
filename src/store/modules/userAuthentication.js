@@ -13,6 +13,7 @@ const state = () => ({
     email: "lualreye@gmail.com",
     phone: "0960952970",
   },
+  token: localStorage.getItem("user-token") || "",
   consultation: {
     specialty: "traumatologia",
     date: "27/01/1995",
@@ -61,6 +62,8 @@ const actions = {
           us_clave: payload.us_clave,
         }
       );
+      const token = response.data.data.token;
+      localStorage.setItem("user-token", token)
       commit("SET_USER", response.data.data.user)
       router.push("/user")
       commit("SET_LOADING", false);
