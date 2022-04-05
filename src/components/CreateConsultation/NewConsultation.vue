@@ -7,7 +7,7 @@
         AGENDAMIENTO DE CITA
       </p>
     </div>
-    <div class="w-full flex justify-center items-center my-14">
+    <div class="w-full flex flex-col justify-center items-center my-14">
       <div class="w-full flex flex-wrap justify-between items-center">
         <!-- GET specialty -->
         <div class="w-full md:w-1/2">
@@ -47,15 +47,15 @@
         </div>
       </div>
       <div class="w-full flex flex-wrap justify-between items-center">
-        <!-- GET specialty -->
+        <!-- GET DATE -->
         <div class="w-full md:w-1/2">
-          <label class="text-textColor w-full text-sm">Especialidad</label>
+          <label class="text-textColor w-full text-sm">Fecha</label>
           <select
-            v-model="specialty"
+            v-model="date"
             placeholder="Seleccionar"
             class="w-full md:w-11/12 bg-backgroundWhite border border-grayColor rounded-lg text-sm px-2 py-2"
           >
-            <option disabled value="">Escoja una especialidad</option>
+            <option disabled value="">Escoja el día</option>
             <option
               v-for="(specialty, i) in specialties"
               :key="i"
@@ -65,15 +65,60 @@
             </option>
           </select>
         </div>
-        <!-- GET DOCTOR -->
+        <!-- GET TIME -->
         <div class="w-full md:w-1/2">
-          <label class="text-textColor w-full text-sm">Médico</label>
+          <label class="text-textColor w-full text-sm">Hora</label>
           <select
-            v-model="doctor"
+            v-model="time"
             placeholder="Seleccionar"
             class="w-full md:w-11/12 bg-backgroundWhite border border-grayColor rounded-lg text-sm px-2 py-2"
           >
-            <option disabled value="">Escoja un médico</option>
+            <option disabled value="">Escoja la hora</option>
+            <option
+              v-for="doctor in doctors"
+              :key="doctor"
+              class="text-textColor tex-sm"
+            >
+              {{ doctor }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="mx-auto w-11/12 flex flex-wrap justify-between items-center mt-8">
+        <div
+          class="w-full flex border-b border-primary justify-between items-center px-1"
+        >
+          <p class="text-textColor text-sm font-light text-left">
+            DATOS DE SEGURO
+          </p>
+        </div>
+        <!-- GET PRODUCT -->
+        <div class="w-full md:w-1/2">
+          <label class="text-textColor w-full text-sm">Producto</label>
+          <select
+            v-model="product"
+            placeholder="Seleccionar"
+            class="w-full md:w-11/12 bg-backgroundWhite border border-grayColor rounded-lg text-sm px-2 py-2"
+          >
+            <option disabled value="">Escoja la hora</option>
+            <option
+              v-for="doctor in doctors"
+              :key="doctor"
+              class="text-textColor tex-sm"
+            >
+              {{ doctor }}
+            </option>
+          </select>
+        </div>
+        <!-- GET COVERAGE -->
+        <div class="w-full md:w-1/2">
+          <label class="text-textColor w-full text-sm">Cobertura</label>
+          <select
+            v-model="coverage"
+            placeholder="Seleccionar"
+            class="w-full md:w-11/12 bg-backgroundWhite border border-grayColor rounded-lg text-sm px-2 py-2"
+          >
+            <option disabled value="">Escoja la hora</option>
             <option
               v-for="doctor in doctors"
               :key="doctor"
@@ -101,7 +146,7 @@ export default {
 
     const consultationState = reactive({
       specialty: "",
-      doctor: ""
+      doctor: "",
     });
 
     const doctors = computed(() => {
