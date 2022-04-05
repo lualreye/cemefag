@@ -199,8 +199,8 @@ export default {
       const user = {
         ...userState
       }
-      store.dispatch("userAuthentication/createPatientUp", user)
-      router.push('/create-consultation')
+      console.log(user)
+      store.dispatch("patient/createPatientUp", user)
     }
 
     return {
