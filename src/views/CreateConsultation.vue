@@ -9,7 +9,7 @@
           <p class="text-textColor text-sm font-light text-left">
             DATOS DEL PACIENTE
           </p>
-          <button class="w-6 h-6 mb-1">
+          <button class="w-6 h-6 mb-1" @click="redirectToEdit">
             <icon name="edit" class="text-primary" />
           </button>
         </div>
@@ -82,6 +82,7 @@ import Consultation from "@/components/CreateConsultation/Consultation.vue"
 import NewConsultation from "@/components/CreateConsultation/NewConsultation.vue"
 import { computed, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   components: {
     Icon,
@@ -94,6 +95,7 @@ export default {
     const patient = computed(() => {
       return store.getters["patient/getPatient"];
     });
+    const router = useRouter()
 
     const editingState = reactive({
       isEditing: false,
@@ -107,10 +109,15 @@ export default {
       }
     }
 
+    function redirectToEdit() {
+      router.push("/new-patient")
+    }
+
     return {
       patient,
       ...toRefs(editingState),
-      editConsultation
+      editConsultation,
+      redirectToEdit
     };
   },
 };
