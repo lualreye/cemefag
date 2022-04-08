@@ -84,7 +84,6 @@ export default {
     // 0907550974
 
     function getAppointment() {
-      console.log(patientId.value.pc_id);
       store.dispatch("patient/getPatientAppointment", patientId.value.pc_id);
     }
 

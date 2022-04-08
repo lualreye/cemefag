@@ -25,7 +25,6 @@ const mutations = {
   },
   SET_APPOINTMENT(state, appointment) {
     state.appointment = appointment;
-    console.los(state.appointment, appointment)
   },
 };
 
