@@ -80,6 +80,39 @@ const actions = {
       console.error("PATIENT_NOT_CREATED", e);
     }
   },
+  async updatePatientUp({ commit }, payload) {
+    try {
+      const patient = {
+        pc_cedula: payload.ci,
+        pc_apellidos: payload.lastname,
+        pc_nombres: payload.name,
+        pc_celular: payload.phone,
+        pc_mail: payload.email,
+        pr_producto: 0,
+        pr_fecha_nacim: payload.birthday,
+      };
+      const patientRes = await axios.put(
+        `${process.env.VUE_APP_BASE_URL}/patient/${payload.id}`,
+        patient,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("user-token")}`,
+          },
+        }
+      );
+      if(patientRes.status === 200) {
+        const patientUpdated = {
+          pc_id: payload.id,
+          ...patient
+        };
+        commit("RESET_PATIENT")
+        commit("SET_PATIENT", patientUpdated);
+        router.push("/create-consultation");
+      }
+    } catch (e) {
+      console.error("PATIENT_NOT_CREATED", e);
+    }
+  },
   async getPatientAppointment({ commit }, payload) {
     try {
       const patientAppointment = await axios.get(
@@ -90,7 +123,6 @@ const actions = {
           },
         }
       );
-      console.log(patientAppointment.data.agendaResult)
       commit("SET_APPOINTMENT", patientAppointment.data.agendaResult);
     } catch (err) {
       console.error("CANNOT_CREATE_DATE");
