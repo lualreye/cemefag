@@ -7,32 +7,81 @@
     </div>
     <div class="w-full flex justify-center items-center my-14">
       <div class="w-full">
-        <p
-          v-if="consultationExists"
-          class="text-sm text-textColor font-light text-center"
-        >
-          No Existe Registro
-        </p>
-        <p v-else class="text-textColor">Aqui ponemos la info</p>
+        <div v-if="consultationExists" class="w-full">
+          <p class="text-sm text-textColor font-light text-center">
+            No Existe Registro
+          </p>
+        </div>
+        <div v-else class="w-full flex justify-between items-center">
+          <div class="flex flex-col justify-between items-start">
+            <p class="text-sm text-primary font-medium mb-4">Médico</p>
+            <p class="text-xs font-light text-textColor">
+              {{ appointment.doctor.me_nombre }}
+            </p>
+          </div>
+          <div class="flex flex-col justify-between items-start">
+            <p class="text-sm text-primary font-medium mb-4">Especialidad</p>
+            <p class="text-xs font-light text-textColor">
+              {{ appointment.speciality.es_nombre }}
+            </p>
+          </div>
+          <div class="flex flex-col justify-between items-start">
+            <p class="text-sm text-primary font-medium mb-4">Producto</p>
+            <p class="text-xs font-light text-textColor">
+              {{ appointment.product.pr_nombre }}
+            </p>
+          </div>
+          <div class="flex flex-col justify-between items-start">
+            <p class="text-sm text-primary font-medium mb-4">Fecha</p>
+            <p class="text-xs font-light text-textColor">
+              {{ appointment.data.ag_fecha_age.substr(0, 10) }}
+            </p>
+          </div>
+          <div class="flex flex-col justify-between items-start">
+            <p class="text-sm text-primary font-medium mb-4">Hora</p>
+            <p class="text-xs font-light text-textColor">
+              {{ appointment.data.ag_fecha_age.substr(11, 5) }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 export default {
   setup() {
     const store = useStore();
     const consultationExists = computed(() => {
-      return Object.keys(store.getters["insurance/getCompany"]).length === 0
-        ? false
-        : true;
+      return appointment.value === null ? true : false;
     });
+
+    const patientId = computed(() => {
+      return store.getters["patient/getPatient"];
+    });
+
+    const appointment = computed(() => {
+      return store.getters["patient/getAppointment"];
+    });
+
+    onMounted(() => {
+      getAppointment();
+    });
+
+    // 0907550974
+
+    function getAppointment() {
+      console.log(patientId.value.pc_id);
+      store.dispatch("patient/getPatientAppointment", patientId.value.pc_id);
+    }
 
     return {
       consultationExists,
+      patientId,
+      appointment,
     };
   },
 };
