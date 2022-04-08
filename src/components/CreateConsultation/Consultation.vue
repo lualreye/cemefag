@@ -45,7 +45,7 @@
           </div>
           <div class="flex flex-col justify-between items-center">
             <p class="text-sm text-primary font-medium mb-4">Eliminar</p>
-            <button class="w-6 h-6 flex justify-center items-center">
+            <button class="w-6 h-6 flex justify-center items-center" @click="eraseAppointment(appointment.data.ag_id)">
               <Icon name="erase" class="text-primary" />
             </button>
           </div>
@@ -88,10 +88,15 @@ export default {
       store.dispatch("patient/getPatientAppointment", patientId.value.pc_id);
     }
 
+    function eraseAppointment(id) {
+      console.log(id)
+    }
+
     return {
       consultationExists,
       patientId,
       appointment,
+      eraseAppointment
     };
   },
 };
