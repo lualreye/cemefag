@@ -43,6 +43,12 @@
               {{ appointment.data.ag_fecha_age.substr(11, 5) }}
             </p>
           </div>
+          <div class="flex flex-col justify-between items-center">
+            <p class="text-sm text-primary font-medium mb-4">Eliminar</p>
+            <button class="w-6 h-6 flex justify-center items-center">
+              <Icon name="erase" class="text-primary" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -50,9 +56,13 @@
 </template>
 
 <script>
+import Icon from "../Global/Icon.vue"
 import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 export default {
+  components: {
+    Icon
+  },
   setup() {
     const store = useStore();
     const consultationExists = computed(() => {
