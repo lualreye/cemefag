@@ -119,7 +119,7 @@
 
 <script>
 import CButton from "@/components/Global/CButton.vue";
-import { computed, reactive, toRefs } from "vue";
+import { computed, reactive, toRefs, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from 'vuex'
 export default {
@@ -178,6 +178,23 @@ export default {
 
     const router = useRouter();
 
+    const patient = computed(() => {
+      return store.getters["patient/getPatient"]
+    })
+
+    onMounted(() => {
+      if(patient.value !== null) {
+        userState.name = patient.value.pc_nombres
+        userState.lastname = patient.value.pc_apellidos
+        userState.ci = patient.value.pc_cedula
+        userState.birthday = patient.value.pr_fecha_nacim
+        userState.email = patient.value.pc_mail
+        userState.phone = patient.value.pc_celular
+      } else {
+        return
+      }
+    })
+
     function redirectionToUser() {
       router.push("/user");
     }
@@ -199,8 +216,16 @@ export default {
       const user = {
         ...userState
       }
-      console.log(user)
-      store.dispatch("patient/createPatientUp", user)
+      if(patient.value !== null) {
+        const id = patient.value.pc_id
+        const userUpdated = {
+          id,
+          ...user
+        }
+        store.dispatch("patient/updatePatientUp", userUpdated)
+      } else {
+        store.dispatch("patient/createPatientUp", user)
+      }
     }
 
     return {
