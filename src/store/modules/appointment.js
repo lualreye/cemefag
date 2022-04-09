@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const state = () => ({
-  specialities: {},
+  specialities: [],
 });
 
 const getters = {
@@ -27,7 +27,7 @@ const actions = {
           },
         }
       );
-      commit("SET_SPECIALITIES", specialitiesResponse);
+      commit("SET_SPECIALITIES", specialitiesResponse.data.data);
     } catch (err) {
       console.error("CANNOT_GET_SPECIALITIES", err);
     }
