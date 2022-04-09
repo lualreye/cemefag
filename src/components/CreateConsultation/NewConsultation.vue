@@ -19,11 +19,11 @@
           >
             <option disabled value="">Escoja una especialidad</option>
             <option
-              v-for="(specialty, i) in specialties"
+              v-for="(specialty, i) in specialities"
               :key="i"
               class="text-textColor tex-sm"
             >
-              {{ specialty.name }}
+              {{ specialty.es_nombre }}
             </option>
           </select>
         </div>
@@ -84,7 +84,9 @@
           </select>
         </div>
       </div>
-      <div class="mx-auto w-11/12 flex flex-wrap justify-between items-center mt-8">
+      <div
+        class="mx-auto w-11/12 flex flex-wrap justify-between items-center mt-8"
+      >
         <div
           class="w-full flex border-b border-primary justify-between items-center px-1"
         >
@@ -135,13 +137,13 @@
 
 <script>
 import { useStore } from "vuex";
-import { computed, reactive, toRefs } from "vue";
+import { computed, onMounted, reactive, toRefs } from "vue";
 export default {
   setup() {
     const store = useStore();
 
-    const specialties = computed(() => {
-      return store.getters["insurance/getSpecialties"];
+    const specialities = computed(() => {
+      return store.getters["appointment/getSpecialities"];
     });
 
     const consultationState = reactive({
@@ -149,21 +151,25 @@ export default {
       doctor: "",
     });
 
+    onMounted(() => {
+      store.dispatch("appointment/fetchSpecialities");
+    });
+
     const doctors = computed(() => {
       if (consultationState.specialty === "") {
         return ["Debes tomar una espacialidad"];
       } else {
-        const consultationId = specialties.value.findIndex(
+        const consultationId = specialities.value.findIndex(
           (specialty) => specialty.name === consultationState.specialty
         );
-        const doctors = specialties.value[consultationId].doctors;
+        const doctors = specialities.value[consultationId].doctors;
         return doctors;
       }
     });
 
     return {
       ...toRefs(consultationState),
-      specialties,
+      specialities,
       doctors,
     };
   },
