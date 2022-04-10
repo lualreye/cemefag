@@ -13,17 +13,17 @@
         <div class="w-full md:w-1/2">
           <label class="text-textColor w-full text-sm">Especialidad</label>
           <select
-            v-model="specialty"
+            v-model="speciality"
             placeholder="Seleccionar"
             class="w-full md:w-11/12 bg-backgroundWhite border border-grayColor rounded-lg text-sm px-2 py-2"
           >
             <option disabled value="">Escoja una especialidad</option>
             <option
-              v-for="(specialty, i) in specialities"
+              v-for="(speciality, i) in specialities"
               :key="i"
               class="text-textColor tex-sm"
             >
-              {{ specialty.es_nombre }}
+              {{ speciality.es_nombre }}
             </option>
           </select>
         </div>
@@ -41,7 +41,7 @@
               :key="doctor"
               class="text-textColor tex-sm"
             >
-              {{ doctor }}
+              {{ doctor.value.me_nombre }}
             </option>
           </select>
         </div>
@@ -57,11 +57,11 @@
           >
             <option disabled value="">Escoja el día</option>
             <option
-              v-for="(specialty, i) in specialties"
+              v-for="(day, i) in days"
               :key="i"
               class="text-textColor tex-sm"
             >
-              {{ specialty.name }}
+              {{ day.name }}
             </option>
           </select>
         </div>
@@ -75,11 +75,11 @@
           >
             <option disabled value="">Escoja la hora</option>
             <option
-              v-for="doctor in doctors"
-              :key="doctor"
+              v-for="appointment in appointments"
+              :key="appointment"
               class="text-textColor tex-sm"
             >
-              {{ doctor }}
+              {{ appointment }}
             </option>
           </select>
         </div>
@@ -104,11 +104,11 @@
           >
             <option disabled value="">Escoja la hora</option>
             <option
-              v-for="doctor in doctors"
-              :key="doctor"
+              v-for="product in products"
+              :key="product"
               class="text-textColor tex-sm"
             >
-              {{ doctor }}
+              {{ product }}
             </option>
           </select>
         </div>
@@ -122,11 +122,11 @@
           >
             <option disabled value="">Escoja la hora</option>
             <option
-              v-for="doctor in doctors"
-              :key="doctor"
+              v-for="coverage in coverages"
+              :key="coverage"
               class="text-textColor tex-sm"
             >
-              {{ doctor }}
+              {{ coverage }}
             </option>
           </select>
         </div>
@@ -147,8 +147,19 @@ export default {
     });
 
     const consultationState = reactive({
-      specialty: "",
+      speciality: "",
       doctor: "",
+      product: "",
+      date: "",
+      time: "",
+      doctors: "",
+      products: "",
+      dates: "",
+      times: "",
+      coverage: "",
+      coverages: "",
+      days: "",
+      appointments: ""
     });
 
     onMounted(() => {
@@ -156,14 +167,16 @@ export default {
     });
 
     const doctors = computed(() => {
-      if (consultationState.specialty === "") {
+      if (consultationState.speciality === "") {
         return ["Debes tomar una espacialidad"];
       } else {
-        const consultationId = specialities.value.findIndex(
-          (specialty) => specialty.name === consultationState.specialty
+        const specialityId = specialities.value.findIndex(
+          (speciality) => speciality.es_nombre === consultationState.speciality
         );
-        const doctors = specialities.value[consultationId].doctors;
-        return doctors;
+        const speciality = specialities.value[specialityId].es_id
+        store.dispatch("appointment/fetchDoctors", speciality)
+        const doctors = store.getters["appointment/getDoctors"]
+        return doctors
       }
     });
 
